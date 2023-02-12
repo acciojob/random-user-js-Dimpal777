@@ -1,5 +1,6 @@
 //your code here
-JavaScript => async function fetchdata() {
+
+    JavaScript => async function fetchdata() {
   const url = "https://randomuser.me/api/";
   const data = await fetch(url);
   const response = await data.json();
