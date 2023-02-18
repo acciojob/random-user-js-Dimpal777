@@ -1,44 +1,58 @@
-// This file is not to be modified. Please ignore this.
-// We will understand all of this later in the course.
-// DO NOT MODIFY THIS FILE
+let data;
+fetch('https://randomuser.me/api/')
+.then((response) => response.json())
+.then((result)=>{
 
-JavaScript => async function fetchdata() {
-  const url = "https://randomuser.me/api/";
-  const data = await fetch(url);
-  const response = await data.json();
-  // console.log(response);
-  return response.results[0];
-}
-const showuser = () => {
-  fetchdata().then((data) => {
-    console.log(data.name.first, data.name.last);
-    console.log(data.picture.large);
-    document.getElementById(
-      "img-box"
-    ).innerHTML = `<img src="${data.picture.large}">`;
-    document.getElementById(
-      "username"
-    ).innerHTML = `${data.name.first} ${data.name.last}`;
-    const ageButton = document.getElementById("age");
-    ageButton.addEventListener("click", () => {
-      console.log(data.dob.age);
-      document.getElementById("output").innerHTML = `<h1>${data.dob.age}<h1>`;
-    });
-    const EmailButton = document.getElementById("email");
-    EmailButton.addEventListener("click", () => {
-      console.log(data.email);
-      document.getElementById("output").innerHTML = `<h1>${data.email}<h1>`;
-    });
-    const PhoneButton = document.getElementById("phone");
-    PhoneButton.addEventListener("click", () => {
-      console.log(data.phone);
-      document.getElementById("output").innerHTML = `<h1>${data.phone}<h1>`;
-    });
-  });
-};
+    data = result.results[0];
+    let user = document.getElementById('user');
 
-showuser();
-const newUser =document.getElementById("getUser");
-newUser.addEventListener("click", () => {
-  showuser();
+    let img = document.createElement('img');
+    img.src = data.picture.large;
+    user.appendChild(img);
+
+    let h2 = document.createElement('h2');
+    
+
+    h2.innerHTML = `${data.name.first}  ${data.name.last}`;
+    user.appendChild(h2);
 });
+function getAnother(){
+    fetch('https://randomuser.me/api/')
+    .then((response) => response.json())
+    .then((result)=>{
+      data = result.results[0];
+        let user = document.getElementById('user');
+        user.innerHTML = "";
+
+        let info = document.getElementById('info');
+        info.innerHTML = "";
+    
+        let img = document.createElement('img');
+        img.src = data.picture.large;
+        user.appendChild(img);
+    
+        let h2 = document.createElement('h2');
+        
+    
+        h2.innerHTML = `${data.name.first}  ${data.name.last}`;
+        user.appendChild(h2);
+    });
+}
+
+function Age(){
+    let info = document.getElementById('info');
+
+    info.innerHTML = `${data.dob.age}`;
+}
+function Email(){
+    let info = document.getElementById('info');
+
+    info.innerHTML = `${data.email}`;
+}
+
+function Phone(){
+    let info = document.getElementById('info');
+
+    info.innerHTML = `${data.cell}`;
+}
+
